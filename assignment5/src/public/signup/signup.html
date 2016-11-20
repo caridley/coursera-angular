@@ -1,0 +1,74 @@
+<div style='margin-left:20px'>
+  <h1>Sign up for our newsletter!</h1>
+
+  <fieldset>
+    <form name='signupForm' novalidate>
+      <input type="text" name="firstName" placeholder="First Name"
+        ng-model="signup.firstName"
+        required
+        style="color:black;">
+      <span ng-if="(signupForm.firstName.$error.required && signupForm.firstName.$touched)">
+        First name is required
+      </span>
+      <p/>
+
+      <input type="text" name="lastName" placeholder="Last Name"
+        ng-model="signup.lastName"
+        required
+        style="color:black;">
+      <span ng-if="(signupForm.lastName.$error.required && signupForm.lastName.$touched)">
+        Last name is required
+      </span>
+      <p/>
+
+      <input type="email" name="email" placeholder="Email"
+        ng-model="signup.email"
+        required
+        style="color:black;">
+      <span ng-if="signupForm.email.$invalid && signupForm.email.$touched">
+        Must be a valid email address: handle@domain format
+      </span>
+      <p/>
+
+      <input type="text" name="phone" placeholder="Phone ###-###-####"
+        ng-model="signup.phone"
+        style="color:black;"
+        required
+        pattern="(\d{3})-(\d{3})-(\d{4})">
+      <span ng-if="signupForm.phone.$invalid && signupForm.phone.$touched">
+        Phone must be in the format ###-###-####.
+      </span>
+      <p/>
+
+      <input type="text" name="favoriteDish" placeholder="Favorite Dish"
+        ng-model="signup.favoriteDish"
+        required
+        menu-item-validator
+        style="color:black;">
+      <span ng-if="(signupForm.favoriteDish.$error.required && signupForm.favoriteDish.$touched)">
+        Favorite dish is required
+      </span>
+      <span ng-if="(signupForm.favoriteDish.$pending.menuItemValidator)">
+        Checking menu item
+      </span>
+      <span ng-if="(signupForm.favoriteDish.$error.menuItemValidator)">
+        Invalid menu item
+      </span>
+      <p/>
+
+      <button
+        ng-disabled="signupForm.$invalid"
+        style="color:black;"
+        ng-click="signup.submit()">Submit</button>
+
+      <div ng-if="signup.submitted">
+        Your information has been saved.
+      </div>
+      <div ng-if="signup.invalidMenuItem">
+        Invalid menu item
+      </div>
+
+
+    </form>
+  </fieldset>
+</div>
